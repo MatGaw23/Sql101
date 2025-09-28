@@ -1,0 +1,31 @@
+{
+  "project": {
+    "name": "SQL Learning Game",
+    "version": "0.1.0",
+    "description": "Interactive SQL learning through progressive challenges"
+  },
+  "database": {
+    "backend": "sqlite",
+    "connection": {
+      "type": "memory",
+      "file_path": ""
+    }
+  },
+  "logging": {
+    "level": "info",
+    "file": "",
+    "console": true,
+    "pattern": "[%Y-%m-%d %H:%M:%S.%e] [%l] %v"
+  },
+  "game": {
+    "quest_directory": "quests",
+    "schema_directory": "schemas",
+    "dataset_directory": "datasets",
+    "progress_file": "player_progress.json"
+  },
+  "ui": {
+    "type": "cli",
+    "color_output": true,
+    "table_style": "ascii"
+  }
+}

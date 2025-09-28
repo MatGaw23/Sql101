@@ -49,8 +49,9 @@ An interactive, extensible C++ console (initially) game that incrementally train
 10. Tier 10: Advanced patterns (pivoting, dynamic filtering) – stretch
 
 ## 7. Technology Stack (Initial)
-- Language: C++23 with clang compiler
+- Language: C++23 
 - Build System: CMake (modern targets, interface libs)
+- Dependency Management: **Conan** (C++ package manager)
 - SQL Layer: `sqlpp11` + backend connector (initially SQLite3)
 - DB Engines (phased):
   - SQLite (embedded, easiest for portability)
@@ -218,11 +219,11 @@ quit
 ```
 
 ## 23. Milestone Roadmap
-**M0: Bootstrap** (Project Foundation)
-- CMake project scaffold with clang C++23 setup
-- Dependency management (`sqlpp11`, `yaml-cpp`, `spdlog`, GoogleTest)
-- Directory structure implementation
-- Basic CI/build verification
+**M0: Bootstrap** (Project Foundation) ✅ **COMPLETE**
+- CMake project scaffold with clang C++23 setup ✅
+- Dependency management via **Conan** (`sqlpp11`, `yaml-cpp`, `spdlog`, GoogleTest) ✅  
+- Directory structure implementation ✅
+- Basic CI/build verification ✅
 
 **M1a: Domain Models** (Core Data Structures)
 - `Quest` struct/class (data only)
@@ -359,7 +360,7 @@ When the AI agent writes code:
 ## 30. Status Tag (Current)
 **ALL SPECIFICATIONS COMPLETE – READY FOR IMPLEMENTATION**
 
-**Next Action:** Begin M0 (Bootstrap) with CMake scaffold and dependency setup.
+**Next Action:** Begin M0 (Bootstrap) with CMake scaffold and Conan-based dependency setup.
 
 **Implementation Strategy:** Small, reviewable increments of 2-3 files per milestone sub-phase to enable thorough review and understanding before proceeding.
 
@@ -371,7 +372,30 @@ When the AI agent writes code:
 
 ---
 ## Quick Summary for Agent
-Build a modular C++23 learning game: parse quest YAML → seed SQLite dataset → run user SQL → evaluate & hint → persist progress. Use modern patterns, clean architecture, type safety, incremental extensibility. Awaiting clarification on test framework, dependencies, and some design preferences before scaffolding.
+Build a modular C++23 learning game: parse quest YAML → seed SQLite dataset → run user SQL → evaluate & hint → persist progress. Use modern patterns, clean architecture, type safety, incremental extensibility. Use **Conan** for C++ dependency management. Awaiting clarification on test framework, dependencies, and some design preferences before scaffolding.
 
 ---
 ## End of HL_Context
+
+---
+## Conan Integration for Dependency Management (M0)
+
+**Why Conan?**
+- Modern, widely adopted C++ package manager.
+- Simplifies dependency management, reproducible builds, and cross-platform support.
+- Integrates seamlessly with CMake.
+
+**How Conan is Used in This Project:**
+1. All third-party dependencies (`sqlpp11`, `yaml-cpp`, `spdlog`, `gtest`, etc.) are managed via Conan recipes.
+2. Developers install Conan (see README for setup instructions).
+3. Conan generates dependency files and integrates with CMake during the configure step.
+4. No manual download or vendoring of libraries—dependencies are declared in `conanfile.txt` or `conanfile.py`.
+5. CI and local builds use the same Conan workflow for consistency.
+
+**Initial Conan Setup Steps:**
+1. Install Conan: `pip install conan` (or via package manager).
+2. Add a `conanfile.txt` listing required packages.
+3. Run `conan install . --output-folder=build --build=missing` before configuring CMake.
+4. CMakeLists.txt is set up to use Conan-generated files for dependency resolution.
+
+**See README.md for detailed Conan usage instructions.**

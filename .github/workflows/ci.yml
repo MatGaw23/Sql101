@@ -77,6 +77,8 @@ jobs:
 
       - name: Run clang-tidy
         uses: cpp-linter/cpp-linter-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           style: file
           tidy-checks: true

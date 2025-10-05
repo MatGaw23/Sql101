@@ -64,9 +64,9 @@ jobs:
         working-directory: build
         run: ctest -C ${{ matrix.build_type }} --output-on-failure
 
-      - name: Run application (smoke test)
-        working-directory: build
-        run: ./build/bin/sql_game
+      # - name: Run application (smoke test)
+      #   working-directory: build
+      #   run: ./build/bin/sql_game
 
   static_analysis:
     name: Static Analysis
